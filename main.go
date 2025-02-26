@@ -2,43 +2,30 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-func literalOrNumber(c byte) bool {
-	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
-}
-
-func isPalindrome(s string) bool {
-	if len(s) == 0 || len(s) == 1 {
-		return true
-	}
-
+func twoSum(numbers []int, target int) []int {
 	i := 0
-	j := len(s) - 1
+	j := len(numbers) - 1
 
 	for i < j {
-		if !literalOrNumber(s[i]) {
-			i++
-			continue
+		sum := numbers[i] + numbers[j]
+		if sum == target {
+			return []int{i + 1, j + 1}
 		}
 
-		if !literalOrNumber(s[j]) {
+		if sum > target {
 			j--
-			continue
 		}
 
-		if strings.ToLower(string(s[i])) != strings.ToLower(string(s[j])) {
-			return false
+		if sum < target {
+			i++
 		}
-
-		i++
-		j--
 	}
 
-	return true
+	return nil
 }
 
 func main() {
-	fmt.Print(isPalindrome("A man, a plan, a canal: Panama"))
+	fmt.Print(twoSum([]int{2, 7, 11, 15}, 9))
 }
