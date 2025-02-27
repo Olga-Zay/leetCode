@@ -4,28 +4,20 @@ import (
 	"fmt"
 )
 
-func twoSum(numbers []int, target int) []int {
+func reverseString(s []byte) []byte {
 	i := 0
-	j := len(numbers) - 1
+	j := len(s) - 1
 
 	for i < j {
-		sum := numbers[i] + numbers[j]
-		if sum == target {
-			return []int{i + 1, j + 1}
-		}
+		s[i], s[j] = s[j], s[i]
 
-		if sum > target {
-			j--
-		}
-
-		if sum < target {
-			i++
-		}
+		i++
+		j--
 	}
 
-	return nil
+	return s
 }
 
 func main() {
-	fmt.Print(twoSum([]int{2, 7, 11, 15}, 9))
+	fmt.Print(reverseString([]byte{72, 101, 108, 108, 111}))
 }
