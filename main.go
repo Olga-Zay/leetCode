@@ -4,20 +4,34 @@ import (
 	"fmt"
 )
 
-func reverseString(s []byte) []byte {
-	i := 0
-	j := len(s) - 1
+func reversePrefix(word string, ch byte) string {
+	wordByte := []byte(word)
+	if len(word) == 1 {
+		return word
+	}
+
+	var i, j int
+
+	for num, l := range wordByte {
+		if l == ch {
+			j = num
+			break
+		}
+	}
+
+	if j == 0 {
+		return word
+	}
 
 	for i < j {
-		s[i], s[j] = s[j], s[i]
-
+		wordByte[i], wordByte[j] = wordByte[j], wordByte[i]
 		i++
 		j--
 	}
 
-	return s
+	return string(wordByte)
 }
 
 func main() {
-	fmt.Print(reverseString([]byte{72, 101, 108, 108, 111}))
+	fmt.Print(reversePrefix("abcdefd", 'd'))
 }
